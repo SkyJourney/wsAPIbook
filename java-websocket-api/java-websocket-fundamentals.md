@@ -12,7 +12,7 @@ description: >-
 
 先来看一下书中的简单示例：
 
-```text
+```java
 import javax.websocket.OnMessage;
 import javax.websocket.server.ServerEndpoint;
 
@@ -32,7 +32,7 @@ public class EchoServer {
 
 此处我们只需要在网页中用js实现ws连接：
 
-```text
+```markup
 <!DOCTYPE html>
 <html>
     <head>
@@ -114,7 +114,7 @@ WebSocket协议定义了客户端和服务端之间长时间存活的专用TCP�
 
 从上文的简单示例中我们了解，我们可以通过一个类加上`@ServerEndpoint`注解就可以配置出一个服务端点。WebSocket共有四种行为相应，分别对应方法注解`@OnOpen`、`@OnMessage`、`@OnError`、`@OnClose`。也就是一个完整的端点业务代码是这样的：
 
-```text
+```java
 @ServerEndPoint("/server")
 public class ServerWebSocketEndPoint{
     @OnOpen //连接建立时调用该方法，一般执行一些初始化
@@ -142,7 +142,7 @@ public class ServerWebSocketEndPoint{
 
 首先注解式的端点类其实会被封装成一个抽象类`javax.websocket.Endpoint`的继承，我们来看一个编程式端点的示例：
 
-```text
+```java
 public class JavaServerEndPoint extends Endpoint {
 
     /**
@@ -216,7 +216,7 @@ public class JavaServerEndPoint extends Endpoint {
 
 我们来关注一下这个接口：
 
-```text
+```java
 public interface ServerApplicationConfig {
     Set<ServerEndpointConfig> getEndpointConfigs(Set<Class<? extends Endpoint>> endpointClasses);
 
@@ -230,7 +230,7 @@ public interface ServerApplicationConfig {
 
 `DefaultServerEndpointConfig`中包含许多对象属性，有幸的是API中`ServerEndpointConfig`接口有一个内部`Builder`类方便我们快速便捷的生成`ServerEndpointConfig`对象：
 
-```text
+```java
     @Override
     public Set<ServerEndpointConfig> getEndpointConfigs(Set<Class<? extends Endpoint>> set) {
         Set<ServerEndpointConfig> configs = new HashSet<>();
